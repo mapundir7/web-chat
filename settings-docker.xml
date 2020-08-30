@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+
+  <!-- The default local repository or 'cache' is set to %HOME%\.m2\repository.
+       You can override the default by using the <localRepository> tag below. -->
+
+<localRepository>/usr/share/maven/ref/repository</localRepository>
+<!--<localRepository>/root/.m2</localRepository>  -->
+
+
+  <!--  Mirrors are defined here.  "<mirrorOf>*</mirrorOf>" is set to catch any
+        additional repositories that appear, and instead use the chat Build
+        Repository.  -->
+
+  <mirrors>
+    <mirror>
+      <id>prod</id>
+      <name>chat Build prod repo-group</name>
+	  <url>https://repo1.maven.org/maven2/</url>
+      <mirrorOf>*</mirrorOf>
+    </mirror>
+  </mirrors>
+
+  <!-- Internal repositories must be defined in the <profiles> section.  Since
+       we use a repository group, need only to define one repo. The profile is 
+       activated below using <activeProfiles>.  -->
+
+  <profiles>
+    <profile>
+      <id>chat</id>
+      <repositories>
+        <repository>
+          <id>prod</id>
+          <name>chat Build production repo-group</name>
+		  <url>https://repo1.maven.org/maven2//</url>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>prod</id>
+          <name>chat Build production repo-group</name>
+		  <url>https://repo1.maven.org/maven2/</url>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+
+  <activeProfiles>
+    <activeProfile>chat</activeProfile>
+  </activeProfiles>
+
+</settings>
