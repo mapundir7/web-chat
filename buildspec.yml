@@ -1,23 +1,29 @@
-version: 0.1
-environment_variables:
-plaintext:
-JAVA_HOME: "/opt/java-8-openjdk-amd64"
+version: 0.2
+env:
+  variables:
+    JAVA_HOME: "/usr/lib/jvm/java-8-openjdk-amd64"
 phases:
-install:
-commands:
-- apt-get update -y
-- apt-get install -y maven
-pre_build:
-commands:
-- echo This is pre_build
-build:
-commands
-- echo Starting build `date`
-- mvn clean package
-post_build:
-commands:
-- echo Build completed on `date`
+    install:
+        runtime-versions:
+            java: openjdk8
+        commands:
+            - printenv
+            - echo "JAVA location is " $JAVA_HOME
+            - apt-get update -y
+            - apt-get install -y maven
+    pre_build:
+        commands:
+            - echo This is pre_build
+    build:
+        commands:       
+            - echo Starting build `date`
+            - mvn clean package
+    post_build:
+        commands:
+            - echo Build completed on `date`
 artifacts:
-files:
-- target/messageUtil-1.0.jar
-discard-paths: yes
+    files:
+        - target/*.jar
+        - appspec.yml
+        - scripts-service/*
+    discard-paths: yes
